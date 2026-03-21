@@ -1,0 +1,158 @@
+#include "Vector.h"
+#include <cstdio>
+#include <cstdlib>
+
+void error(const char* p) // global error function
+{
+    printf(p);
+    exit(1);
+}
+
+Vector::Vector(int s)
+{
+    if (s <= 0) error("Incorrect vector size");
+    sz = s;
+    V = new Satur[sz];
+}
+
+Vector::Vector()
+{
+    Vector(99);
+}
+
+Vector::Vector(const Vector& other) : Vector(other.sz) // copy constructor, original is alive
+{
+    for (int i = 0; i < sz; i++)
+    {
+        V[i] = other.V[i];
+    }
+}
+
+Vector::Vector(Vector&& other) // displacement constructor, data was taken from a temporary object
+{
+    V = other.V;
+    sz = other.sz;
+    other.V = 0;
+    other.sz = 0;
+}
+
+Vector::~Vector() // destructor
+{
+    delete[] V;
+}
+
+void Vector::print() const
+{
+    printf("[ ");
+    for (int i = 0; i < sz; i++)
+    {
+        V[i].print();
+    }
+    printf(" ]\n");
+}
+
+Satur& Vector::operator[](int i)
+{
+    if (i < 0 || i >= sz) error("Invalid index"); // index checking
+
+    return V[i];
+}
+
+void Vector::resize(int newsz)
+{
+    if (newsz <= 0) error("Invalid new vector size");
+
+    if (newsz == sz) return;
+
+    Satur* temp = new Satur[newsz];
+
+    int minsz;
+    if (sz < newsz)
+        minsz = sz;
+    else
+        minsz = newsz;
+
+    for (int i = 0; i < minsz; i++)
+        temp[i] = V[i];
+
+    for (int i = minsz; i < newsz; i++)
+        temp[i] = Satur(0);
+
+    delete[] V;
+    V = temp;
+    sz = newsz;
+}
+
+void equalize(Vector& a, Vector& b)
+{
+    int maxsz;
+
+    if (a.sz > b.sz)
+        maxsz = a.sz;
+    else
+        maxsz = b.sz;
+
+    a.resize(maxsz);
+    b.resize(maxsz);
+}
+
+void Vector::operator=(const Vector& other)
+{
+    if (sz != other.sz)
+    {
+        delete[] V;
+        sz = other.sz;
+        V = new Satur[sz];
+    }
+
+    for (int i = 0; i < sz; i++) // coping every element, original is alive
+    {
+        V[i] = other.V[i];
+    }
+}
+
+void Vector::operator=(Vector&& other)
+{
+    if (this == &other) return;
+
+    delete[] V; // deleting old
+    V = other.V;
+    sz = other.sz;
+    other.V = nullptr; // reseting to zero (pointer)
+    other.sz = 0;
+
+}
+
+Vector operator+(Vector& a, Vector& b)
+{
+    if (a.sz != b.sz) // comparing sizes
+    {
+        equalize(a, b);
+    }
+
+    Vector sum(a.sz);
+
+    for (int i = 0; i < a.sz; i++)
+    {
+        sum.V[i] = a.V[i] + b.V[i];
+    }
+
+    return sum;
+}
+
+Vector operator-(Vector& a, Vector& b)
+{
+    if (a.sz != b.sz) // comparing sizes
+    {
+        equalize(a, b);
+    }
+
+    Vector sub(a.sz);
+
+    for (int i = 0; i < a.sz; i++)
+    {
+        sub.V[i] = a.V[i] - b.V[i];
+    }
+
+    return sub;
+}
