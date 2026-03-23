@@ -125,16 +125,19 @@ void Vector::operator=(Vector&& other)
 
 Vector operator+(Vector& a, Vector& b)
 {
+    Vector first = a;
+    Vector second = b;
+
     if (a.sz != b.sz) // comparing sizes
     {
-        equalize(a, b);
+        equalize(first, second);
     }
 
-    Vector sum(a.sz);
+    Vector sum(first.sz);
 
-    for (int i = 0; i < a.sz; i++)
+    for (int i = 0; i < first.sz; i++)
     {
-        sum.V[i] = a.V[i] + b.V[i];
+        sum.V[i] = first.V[i] + second.V[i];
     }
 
     return sum;
@@ -142,16 +145,19 @@ Vector operator+(Vector& a, Vector& b)
 
 Vector operator-(Vector& a, Vector& b)
 {
+    Vector first = a;
+    Vector second = b;
+
     if (a.sz != b.sz) // comparing sizes
     {
-        equalize(a, b);
+        equalize(first, second);
     }
 
-    Vector sub(a.sz);
+    Vector sub(first.sz);
 
-    for (int i = 0; i < a.sz; i++)
+    for (int i = 0; i < first.sz; i++)
     {
-        sub.V[i] = a.V[i] - b.V[i];
+        sub.V[i] = first.V[i] - second.V[i];
     }
 
     return sub;
