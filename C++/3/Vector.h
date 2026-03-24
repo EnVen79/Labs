@@ -13,6 +13,8 @@ public:
     Vector(const Vector& other); // copy constructor
     Vector(Vector&& other); // displacement constructor
     ~Vector(); // destructor
+    void operator=(const Vector& other); // assignment by copying
+    void operator=(Vector&& other); // assignment by displacement
 
     inline int size() const { return sz; } // size getter
     inline Satur& elem(int i) { return V[i]; } // element getter
@@ -23,9 +25,6 @@ public:
 
     void resize(int newSize); // changing rhe size of vector
     friend void equalize(Vector& a, Vector& b); // equalize sizes of a and b vector
-
-    void operator=(const Vector& other); // assignment by copying
-    void operator=(Vector&& other); // assignment by displacement
 
     friend Vector operator+(Vector& a, Vector& b); // addition
     friend Vector operator-(Vector& a, Vector& b); // subtraction
