@@ -15,9 +15,10 @@ Vector::Vector(int s)
     V = new Satur[sz];
 }
 
-Vector::Vector()
+Vector::Vector()///???
 {
-    Vector(99);
+    sz = 99;
+    V = new Satur[sz];
 }
 
 Vector::Vector(const Vector& other) : Vector(other.sz) // copy constructor, original is alive
@@ -98,6 +99,8 @@ void equalize(Vector& a, Vector& b)
 
 void Vector::operator=(const Vector& other)
 {
+    if (this == &other) return;
+
     if (sz != other.sz)
     {
         delete[] V;
@@ -120,7 +123,6 @@ void Vector::operator=(Vector&& other)
     sz = other.sz;
     other.V = nullptr; // reseting to zero (pointer)
     other.sz = 0;
-
 }
 
 Vector operator+(Vector& a, Vector& b)
@@ -137,7 +139,7 @@ Vector operator+(Vector& a, Vector& b)
 
     for (int i = 0; i < first.sz; i++)
     {
-        sum.V[i] = first.V[i] + second.V[i];
+        sum.elem(i) = first.elem(i) + second.elem(i);
     }
 
     return sum;
@@ -157,7 +159,7 @@ Vector operator-(Vector& a, Vector& b)
 
     for (int i = 0; i < first.sz; i++)
     {
-        sub.V[i] = first.V[i] - second.V[i];
+        sub.elem(i) = first.elem(i) - second.elem(i);
     }
 
     return sub;
