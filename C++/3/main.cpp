@@ -5,9 +5,9 @@ using namespace std;
 
 int main()
 {
-    Vector a(3);
+    Vector a(3),aaa;
     Vector b(5);
-
+    
     a[0] = Satur(1);
     a[1] = Satur(2);
     a[2] = Satur(3);
@@ -17,6 +17,8 @@ int main()
     b[2] = Satur(30);
     b[3] = Satur(40);
     b[4] = Satur(50);
+
+    aaa[35] = 15;
 
     cout << "Vector a:" << endl;
     a.print();
