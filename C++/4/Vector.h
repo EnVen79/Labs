@@ -16,7 +16,7 @@ public:
 		if (s < 0)
 			throw "Incorrect vector size";
 		sz = s;
-		V = new T[sz](); // initializing elements with the default value
+		V = new T[sz];
 	}
 
 	Vector() // default size = 0
