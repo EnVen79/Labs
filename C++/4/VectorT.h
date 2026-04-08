@@ -15,7 +15,7 @@ private:
 
 public:
 
-	VectorT(int rows, int cols = -1) // constructor with size
+	VectorT(int rows, int cols = -1) // constructor with size also for matrix
 	{
 		if (rows < 0)
 			throw "Incorrect vector size";
