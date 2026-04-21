@@ -8,13 +8,13 @@ protected:
     float colorR;
     float colorG;
     float colorB;
+    virtual void draw() const = 0;
+    virtual void erase() const = 0;
 
 public:
     Figure();
     Figure(float bx, float by, float r, float g, float b);
     virtual ~Figure();
-
-    virtual void draw() const = 0;
 
     void moveBy(float dx, float dy);
 };
