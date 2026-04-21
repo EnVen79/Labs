@@ -11,6 +11,8 @@ Figure::~Figure()
 
 void Figure::moveBy(float dx, float dy)
 {
+    erase();
     baseX += dx;
     baseY += dy;
+    draw();
 }
