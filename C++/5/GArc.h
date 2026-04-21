@@ -9,6 +9,8 @@ private:
     float rad;
     float strAngle;
     float endAngle;
+    void draw() const;
+    void erase() const;
 
 public:
     GArc();
@@ -18,6 +20,4 @@ public:
         float strA, float endA,
         float r, float g, float b);
     ~GArc();
-
-    void draw() const override;
 };
