@@ -8,6 +8,8 @@ private:
     float y1;
     float x2;
     float y2;
+    void draw() const;
+    void erase() const;
 
 public:
     GLine();
@@ -16,6 +18,4 @@ public:
           float _x2, float _y2,
           float r, float g, float b);
     ~GLine();
-
-    void draw() const override;
 };
