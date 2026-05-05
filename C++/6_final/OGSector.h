@@ -30,6 +30,5 @@ public:
         float r, float g, float b);
     ~OGSector();
 
-    void moveBy(float dx, float dy);
     std::string oprint() const;
 };
