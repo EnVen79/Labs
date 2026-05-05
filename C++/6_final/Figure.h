@@ -16,5 +16,5 @@ public:
     Figure(float bx, float by, float r, float g, float b);
     virtual ~Figure();
 
-    virtual void moveBy(float dx, float dy);
+    void moveBy(float dx, float dy);
 };
