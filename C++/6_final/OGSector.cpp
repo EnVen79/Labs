@@ -66,14 +66,6 @@ void OGSector::erase() const
     OGSectorLine::erase();
 }
 
-void OGSector::moveBy(float dx, float dy)
-{
-    erase();
-    baseX += dx;
-    baseY += dy;
-    draw();
-}
-
 std::string OGSector::oprint() const
 {
     return "I am Sector\n"
